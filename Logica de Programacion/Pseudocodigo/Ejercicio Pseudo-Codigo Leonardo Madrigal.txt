@@ -1,0 +1,96 @@
+Ejercicio 1 
+	1. Inicio
+	2. Atributo "precio_final"
+	3. Atributo "precio_producto"
+	4. Atributo "descuento"
+	5. descuento = 0 
+	6. precio_final = 0
+	7. precio_producto = 0 
+ 	8. Mostrar "Ingrese el precio del producto"
+	9. Pedir "precio_producto" 
+	10. Si el "precio_producto" < 100 entonces:
+		10.1 descuento = precio_producto * 0.02
+	11. Si el "precio_producto" => 100 entonces:
+		11.1 descuento = precio_producto * 0.10
+	12. precio_final = precio_final + precio_producto - descuento
+	13. Mostrar "Su precio final del producto es de .."
+	14. Mostrar precio_final
+	15. Mostrar "y su descuento es de  .."
+	16. Mostrar "descuento"
+	17. Fin
+
+Ejercicio 2 
+	1. Inicio
+	2. Atributo "tiempo_segundos" 
+	3. Atributo "cantidad_restante_segundos"
+	4. Mostrar "Ingrese la cantidad de segundos"
+	5. Pedir "tiempo_segundos".
+	6. cantidad_restante_segundos = 0 
+	7. Si (tiempo_segundos > 600)
+		7.1 Mostrar "El precio es “Mayor""		
+	8. Si (tiempo_segundos < 600)
+		8.1 cantidad_restante_segundos = 600 - tiempo_segundos
+		8.2 Mostrar "La cantidad de segundos restantes para llegar a 10 minutos es de .."
+		8.3 Mostrar "cantidad_restante_segundos"
+	9. Si (tiempo_segundos == 600)
+		9.2 Mostrar "El precio es “Igual""
+	10. Fin
+
+Ejercicio 3
+
+	1. Inicio
+	2. Atributo "numero_usuario"
+	3. Atributo "contador"
+	3. Atributo "suma_final"
+	4. Mostrar "Ingrese un numero"
+	5. Pedir "numero_usuario" 
+	6. contador = 1 
+	7. suma_final = 0 
+	8. mientras (contador <= numero_usuario) hacer:
+		8.1 suma_final = suma_final + contador	
+		8.2. contador = contador + 1 
+	9. Mostrar "La suma final desde el numero 1 hasta el .."
+	10. Mostrar "numero_usuario"
+	11. Mostrar " es de .. "
+	12. Mostrar "suma_final".
+	13. Fin
+
+Ejercicio 4
+
+Ejercicio 4
+
+1. Inicio
+2. Atributo "numero_al_azar"
+3. Atributo "numero_usuario"
+4. numero_al_azar = 7
+5. Mostrar "Ingrese un número del 1 al 10"
+6. Pedir "numero_usuario"
+7. Mientras (numero_usuario != numero_al_azar) hacer:
+    7.1 Mostrar "El número es incorrecto"
+    7.2 Mostrar "Ingrese un número del 1 al 10"
+    7.3 Pedir "numero_usuario"
+8. Mostrar "El número"
+9. Mostrar "numero_usuario"
+10. Mostrar "coincide con el número al azar que sería"
+11. Mostrar "numero_al_azar"
+12. Fin
+
+
+Ejercicio 4
+
+1. Inicio
+2. Atributo "numero_al_azar"
+3. Atributo "numero_usuario"
+4. numero_al_azar = 7
+5. Mostrar "Ingrese un número del 1 al 10"
+6. Pedir "numero_usuario"
+7. Mientras (numero_usuario != numero_al_azar) hacer:
+    7.1 Mostrar "El número es incorrecto"
+    7.2 Mostrar "Ingrese un número del 1 al 10"
+    7.3 Pedir "numero_usuario"
+8. Mostrar "El número"
+9. Mostrar "numero_usuario"
+10. Mostrar "coincide con el número al azar que sería"
+11. Mostrar "numero_al_azar"
+12. Fin
+

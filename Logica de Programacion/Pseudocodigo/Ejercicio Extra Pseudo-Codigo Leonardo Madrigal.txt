@@ -1,0 +1,71 @@
+Ejercicio 1 
+	1. Inicio
+	2. Atributo "primer_numero" 
+	3. Atributo "segundo_numero" 
+	4. Atributo "numero_menor"
+	5. Atributo "numero_mayor"
+ 	6. Mostrar "Ingrese un primer numero"
+	7. Pedir "primer_numero" 
+	8. Mostrar "Ingrese un segundo numero"
+	9. Pedir "segundo_numero" 
+	10. numero_menor = 0
+	11. numero_menor = 0
+	10. Si el "primer_numero" < "segundo_numero" entonces:
+		10.1 numero_menor = numero_menor + primer_numero
+		10.2 numero_mayor = numero_mayor + segundo_numero
+	11. Si el "primer_numero" > "segundo_numero" entonces:
+		10.1 numero_mayor = numero_mayor + primer_numero
+		10.2 numero_menor = numero_menor + segundo_numero
+	12. Mostrar "El numero menor es:"
+	13. Mostrar numero_menor
+	14. Mostrar "y el numero mayor es:"
+	15. Mostrar numero_mayor
+	16. Fin
+
+Ejercicio 2 
+	1. Inicio
+	2. Atributo "km_por_hora" 
+	3. Atributo "km_a_mts" 
+	4. Atributo "calculo_final"
+	5. Mostrar " Ingrese una velocidad en kilometros por hora: "
+	6. Pedir "km_por_hora".
+	7. km_a_mts = km_por_hora * 1000 
+	8. calculo_final = km_a_mts / 3600 
+	9. Mostrar "El calculo de"
+	10. Mostrar km_por_hora
+	11. Mostrar "k/h a m/s es de:"
+	12. Mostrar calculo_final
+	13. Mostrar "m/s"
+	14. Fin
+
+Ejercicio 3
+
+	1. Inicio
+	2. Atributo "sexo_usuario"
+	3. Atributo "contador"
+	4. Atributo "cantidad_hombres"
+	5. Atributo "cantidad_mujeres"
+	6. Atributo "cantidad_porcentaje_hombres"
+	7. Atributo "cantidad_porcentaje_mujeres"
+	8. Atributo "cantidad_porcentaje_entre_6"
+	9. contador = 1 
+	10. cantidad_mujeres = 0 
+	11. cantidad_hombres = 0 
+	12. cantidad_porcentaje_entre_6 = 100 / 6
+	13. mientras (contador <= 6) hacer:
+		13.1 Mostrar "Ingrese un sexo en donde "1" representa a una mujer y "2" representa un hombre numero:"
+		13.2 Mostrar contador
+		13.2 Pedir "sexo_usuario" 
+		13.3 si (sexo_usuario == 1)
+			13.3.1 cantidad_mujeres = cantidad_mujeres + 1	
+		13.4 si (sexo_usuario == 2)
+			13.4.1 cantidad_hombres = cantidad_hombres + 1	
+		13.5 contador = contador + 1 
+	14. cantidad_porcentaje_mujeres = cantidad_porcentaje_entre_6 * cantidad_mujeres
+	15. cantidad_porcentaje_hombres = cantidad_porcentaje_entre_6 * cantidad_hombres
+	16. Mostrar "La cantidad de porcentaje de mujeres es de:"
+	17. Mostrar cantidad_porcentaje_mujeres
+	18. Mostrar " y el porcentaje de hombres es de:".
+	19. Mostrar cantidad_porcentaje_hombres
+	20. Fin
+

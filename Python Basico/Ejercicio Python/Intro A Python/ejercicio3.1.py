@@ -1,0 +1,5 @@
+print("Hello world")
+print("My name is Leonardo")
+print("I was born in 2005")
+print("I was born in the city of Heredia, Costa Rica")
+print("My favorite hobbies are playing guitar, playing video games, and doing bicycle rides")

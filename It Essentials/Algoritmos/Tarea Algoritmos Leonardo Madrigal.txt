@@ -1,0 +1,51 @@
+1. Cree un algoritmo para ver un video en Youtube. Sea lo más especifico posible:
+
+	1. Abro la computadora y la prendo.
+	2. Espero a que cargue.
+	3. Abro la primera ventana y pongo mi clave 
+	4. Entro a mi computadora
+	5. Abro el navegador web de Brave
+	6. Coloco en el buscador youtube.com
+	7. Busco y selecciono con mi mouse un video de mi gusto
+	8. Lo veo de principio a fin.
+	9. Si me gustó el video:
+		A. Pongo el mouse hacia el boton del pulgar arriba
+	10. Si no me gustó el video:
+		A. Pongo el mouse hacia el boton del pulgar abajo
+	11. Si no estoy suscrito al canal o no tengo la campanita de notificaciones activa:
+		A. Le doy el boton de "Suscribete" o a la campanita de notificaciones.
+	12. Reviso los comentario del video visto.
+	13. Por cada comentario que lea en la sección de comentarios:
+		A. Lo leo de principio a fin.
+		B. Si me gustó el comentario y me pareció coherente a lo visto en el video:
+			B.1 Pongo el mouse hacia el boton del pulgar arriba.
+		C. Si no me gustó el comentario y me pareció incoherente a lo visto en el video:
+			C.1 Pongo el mouse hacia el boton del pulgar abajo.
+	14. Finalmente, me salgo de YouTube cerrando la pagina actual en el navegador web de Brave.
+	15. Fin
+		
+
+2. Cree un algoritmo que describa su rutina diaria. Use condiciones, condiciones multiples y ciclos:
+
+	1. Me levanto de la cama
+	2. Me pongo mi ropa 
+	3. Me lavo los dientes
+	4. Si tengo hambre:
+  		A. Me hago un desayuno con huevos y cafe
+	5. Sino, tomo una ducha.
+	6. Si tengo internet y no esta caida la aplicacion de outlook o Jira
+  		a. Me conecto al trabajo virtual
+	7. Sino:
+  		a. le aviso a mi superior.
+	8. Por cada historia de usuario a realizar:
+  		a. La reviso
+  		b. Sigo las instrucciones 
+  		c. Investigo 
+  		d. le doy como completada la historia
+	9. Termino mi session de trabajo
+		10. Ceno
+		11. Voy a dormir
+		12. Fin
+
+
+
