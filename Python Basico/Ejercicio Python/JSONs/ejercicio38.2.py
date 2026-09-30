@@ -1,58 +1,5 @@
 import json
 
-pokemons = [
-
-   {
-      "name":"Pikachu",
-      "type":"Electric",
-      "level":54,
-      "weight_kg":6.0,
-      "is_shiny":False,
-      "held_item":None,
-      "skills":[
-         "Thunder Shock",
-         "Quick Attack",
-         "Thunderbolt",
-         "Volt Tackle"
-      ],
-      "stats":{
-         "hp":35,
-         "attack":55,
-         "defense":40,
-         "sp_attack":50,
-         "sp_defense":50,
-         "speed":90
-      }
-   },
-   
-   {
-      "name":"Charmander",
-      "type":"Fire",
-      "level":8,
-      "weight_kg":8.5,
-      "is_shiny":True,
-      "held_item":"Charcoal",
-      "skills":[
-         "Ember",
-         "Scratch",
-         "Tackle",
-         "Smokescreen"
-      ],
-      "stats":{
-         "hp":39,
-         "attack":52,
-         "defense":43,
-         "sp_attack":60,
-         "sp_defense":50,
-         "speed":65
-      }
-   }
-]
-
-# Pasar lista a un archivo JSON llamada pokemons.json
-with open("pokemons.json", "w") as f:
-    json.dump(pokemons, f)
-
 
 # Logica para ingresar un nuervo pokemosn al JSON.
 
@@ -89,18 +36,37 @@ def enter_new_pokemon():
     
     return new_pokemon
 
-# Leer el archivo JSON existente
-with open("pokemons.json", "r") as f:
-    existing_pokemons = json.load(f)
 
-# Agregar el nuevo Pokémon a la lista existente
-new_pokemon = enter_new_pokemon()
-existing_pokemons.append(new_pokemon)
+# load existing pokemon from the JSON file
+def load_pokemons_from_json(file_path):
+    try:
+        with open(file_path, "r") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return []
 
-# Escribir la lista actualizada de Pokémon en el archivo JSON
-with open("pokemons.json", "w") as f:
-    json.dump(existing_pokemons, f)
+# Save pokemon to the JSON file
+def save_pokemons_to_json(pokemons, file_path):
+      with open(file_path, "w") as f:
+         json.dump(pokemons, f, indent=4)
 
-# Imprimir la lista actualizada de Pokémon
-print("Lista actualizada de Pokémon:")
-print(json.dumps(existing_pokemons))
+
+def main():
+
+    # Load existing pokemons from the JSON file
+    existing_pokemons = load_pokemons_from_json("pokemons.json")
+
+    # Enter a new Pokémon
+    new_pokemon = enter_new_pokemon()
+
+    # Add the new Pokémon to the existing list
+    existing_pokemons.append(new_pokemon)
+
+    # Save the updated list of Pokémon to the JSON file
+    save_pokemons_to_json(existing_pokemons, "pokemons.json")
+
+    # print the updated list of Pokémon
+    print("Lista actualizada de Pokémon:")
+    print(json.dumps(existing_pokemons, indent=4))
+
+main()
