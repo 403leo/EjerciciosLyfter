@@ -17,6 +17,10 @@ def addStudent(student_list, amount_ofstudents):
     try:
         for _ in range(amount_ofstudents):
             student = {}
+
+
+            # Request a valid name.
+            
             student["name"] = input("Enter the student's name: ")
 
             if is_empty_name(student["name"]) or has_numbers(student["name"]):
@@ -29,24 +33,16 @@ def addStudent(student_list, amount_ofstudents):
             # Exception that captures duplicate students
             if has_duplicate_students(student_list, student["name"], student["homeroom"]):
                 raise DuplicateStudentException
+
             
-            student["spanish_grade"] = float(input("Enter the student's Spanish grade: "))
-            if not is_valid_grade(student["spanish_grade"]):
-                raise ValueError
+            # Request each grade until it is valid.
+            student["spanish_grade"] = get_valid_grade("Spanish")
+            student["english_grade"] = get_valid_grade("English")
+            student["science_grade"] = get_valid_grade("Science")
+            student["social_studies_grade"] = get_valid_grade("Social Studies")
 
 
-            student["english_grade"] = float(input("Enter the student's English grade: "))
-            if not is_valid_grade(student["english_grade"]):
-                raise ValueError
-
-            student["science_grade"] = float(input("Enter the student's Science grade: "))
-            if not is_valid_grade(student["science_grade"]):
-                raise ValueError
-
-            student["social_studies_grade"] = float(input("Enter the student's Social Studies grade: "))
-            if not is_valid_grade(student["social_studies_grade"]):
-                raise ValueError
-
+            # Add the student only after all fields are valid.
             student_list.append(student)
     except ValueError:
         print("Invalid input. Please enter a valid number.")
@@ -58,6 +54,24 @@ def addStudent(student_list, amount_ofstudents):
         print("Invalid homeroom. It must be a letter followed by a number.")
     except DuplicateStudentException:
         print("Duplicate student found. Please enter a unique name and homeroom.")
+
+# Method that requests a valid grade for a subject, 
+# if the user enters an invalid grade, 
+# it will ask again until a valid grade is entered.
+def get_valid_grade(subject):
+    while True:
+        try:
+            grade = float(input(f"Enter the student's {subject} grade: "))
+
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+            continue
+
+        if not is_valid_grade(grade):
+            print("Invalid grade. The grade must be between 0 and 100.")
+            continue
+
+        return grade
 
 
 # Method that recieves a grade and returns if it is a grade higher than 0 and lower than 101.
@@ -86,9 +100,9 @@ def has_numbers(name):
 # Method that identifies a homeroom and determines if it has the correct format, 
 # which is a letter followed by a number, for example A1, B2, C3, etc. 
 def is_valid_homeroom(homeroom):
-    # Check if the homeroom is a string and has a length of 2, 
-    # and if the first character is a letter and the second character is a digit.
-    if len(homeroom) == 2 and homeroom[0].isalpha() and homeroom[1].isdigit():
+    # Check if the homeroom is a string and has a length of 2 or more
+    # and if the first character is a number and the second character is a letter.
+    if len(homeroom) >= 2 and homeroom[:-1].isdigit() and homeroom[-1].isalpha():
         return True
     else:
         return False 
@@ -117,35 +131,23 @@ def top_3_major_grade_point_average(student_list):
         print("No students have been added yet.")
         return
 
-    first_grade = 0
-    second_grade = 0
-    third_grade = 0
-
     # Calculate the average grade for each student
     for student in student_list:
         grades = [student["spanish_grade"], student["english_grade"], student["science_grade"], student["social_studies_grade"]]
         student["average_grade"] = sum(grades) / len(grades)
-        if student["average_grade"] > first_grade:
-            first_grade = student["average_grade"]
-        if student["average_grade"] > second_grade and student["average_grade"] < first_grade:
-            second_grade = student["average_grade"]
-        if student["average_grade"] > third_grade and student["average_grade"] < second_grade:
-            third_grade = student["average_grade"]
 
     # Sort the students by average grade in descending order
-    #sorted_students = sorted(student_list, key=lambda x: x["average_grade"], reverse=True)
+    sorted_students = sorted(
+        student_list, 
+        key=lambda x: x["average_grade"], 
+        reverse=True)
 
     # Get the top 3 students
-    #top_3_students = sorted_students[:3]
+    top_3_students = sorted_students[:3]
 
     print("Top 3 Students by Average Grade:")
-    for student in student_list:
-        if student["average_grade"] == first_grade:
-            print(f"1. Name: {student['name']}, Average Grade: {student['average_grade']:.2f}")
-        elif student["average_grade"] == second_grade:
-            print(f"2. Name: {student['name']}, Average Grade: {student['average_grade']:.2f}")
-        elif student["average_grade"] == third_grade:
-            print(f"3. Name: {student['name']}, Average Grade: {student['average_grade']:.2f}")
+    for position, student in enumerate(top_3_students, start=1):
+        print(f"{position}. Name: {student['name']}, Homeroom: {student['homeroom']}, Average Grade: {student['average_grade']:.2f}")
 
 # Method that calculates the average of all averages of the students and returns it.
 def calculate_overall_average(student_list):
@@ -176,6 +178,12 @@ def eliminate_student_by_name_and_homeroom(student_list):
     name = input("Enter the student's name: ")
     homeroom = input("Enter the student's homeroom: ")
 
+    # The system asks first if the user is sure about eliminating the student, if the user says yes, it will eliminate the student, if the user says no, it will return to the main menu.
+    confirmation = input(f"Are you sure you want to remove the student {name} from homeroom {homeroom}? (yes/no): ")
+    if confirmation.lower() != "yes":
+        print("Operation cancelled.")
+        return
+
     # Loop through the student list and remove the student with the matching name and homeroom
     for student in student_list:
         if student["name"] == name and student["homeroom"] == homeroom:
@@ -193,19 +201,39 @@ def show_failed_students(student_list):
 
     # Loop through the student list and check if the average grade is lower than 70
     for student in student_list:
-        grades = [student["spanish_grade"], student["english_grade"], student["science_grade"], student["social_studies_grade"]]       
+        grades = {
+            "spanish": student["spanish_grade"],
+            "english": student["english_grade"],
+            "science": student["science_grade"],
+            "social_studies": student["social_studies_grade"]
+        }
+        
+        # Store the failed subjects of the students in a list
+        failed_subjects = {}
+        
         # Loop throught the student grades and if tehres at least 1 grade lower than 60
-        # the student is considered failed and is added to the failed_students list
-        for grade in grades:
+        # the student is considered failed and is added to the failed_subjects list
+        for subject, grade in grades.items():
             if grade < 60:
-                failed_students.append(student)
-                break
+                failed_subjects[subject] = grade
 
-    # It shows the information
+        # add the student only if at least one subject was failed
+        if failed_subjects:
+            failed_students.append({
+                "name": student["name"],
+                "homeroom": student["homeroom"],
+                "failed_subjects": failed_subjects
+            })
+
+    # It shows exclusively only the grades of the subjects of the students that have failed, and it shows the name, homeroom, and grades of those failed subjects.
     if failed_students:
-        print("Failed Students (Average Grade < 60):")
+        print("Students with Failed Subjects:")
         for student in failed_students:
-            print(f"Name: {student['name']}, Homeroom: {student['homeroom']}, Spanish Grade: {student['spanish_grade']}, English Grade: {student['english_grade']}, science Grade: {student['science_grade']}, Social Studies Grade: {student['social_studies_grade']}")
+            print(f"Name: {student['name']}, Homeroom: {student['homeroom']}")
+
+            for subject, grade in student["failed_subjects"].items():
+                print(f"  Subject:{subject} Grade: {grade}")
     else:
+        
         print("No students have failed.")
 
