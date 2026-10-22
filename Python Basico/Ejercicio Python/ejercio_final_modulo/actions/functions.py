@@ -16,44 +16,35 @@ def addStudent(student_list, amount_ofstudents):
     # Name, homeroom, spanish grade, english grade, science grade, and social studies grade
     try:
         for _ in range(amount_ofstudents):
-            student = {}
+
+            while True:
+                student = {}
 
 
-            # Request a valid name.
-            
-            student["name"] = input("Enter the student's name: ")
+                # Request a valid name.
+                student["name"] = get_valid_name("name")
+                student["homeroom"] = get_valid_homeroom("homeroom")
 
-            if is_empty_name(student["name"]) or has_numbers(student["name"]):
-                raise NameException
+                # Exception that captures duplicate students
+                if has_duplicate_students(student_list, student["name"], student["homeroom"]):
+                    print("Duplicate student found. Please enter a unique name and homeroom.")
+                    continue
 
-            student["homeroom"] = input("Enter the student's homeroom: ")
-            if not is_valid_homeroom(student["homeroom"]):
-                raise HomeRoomException
-
-            # Exception that captures duplicate students
-            if has_duplicate_students(student_list, student["name"], student["homeroom"]):
-                raise DuplicateStudentException
-
-            
-            # Request each grade until it is valid.
-            student["spanish_grade"] = get_valid_grade("Spanish")
-            student["english_grade"] = get_valid_grade("English")
-            student["science_grade"] = get_valid_grade("Science")
-            student["social_studies_grade"] = get_valid_grade("Social Studies")
+                
+                
+                # Request each grade until it is valid.
+                student["spanish_grade"] = get_valid_grade("Spanish")
+                student["english_grade"] = get_valid_grade("English")
+                student["science_grade"] = get_valid_grade("Science")
+                student["social_studies_grade"] = get_valid_grade("Social Studies")
 
 
-            # Add the student only after all fields are valid.
-            student_list.append(student)
+                # Add the student only after all fields are valid.
+                student_list.append(student)
+
+                break
     except ValueError:
         print("Invalid input. Please enter a valid number.")
-
-    except NameException:
-        print("Invalid name. It cannot be empty or have numbers.")
-
-    except HomeRoomException:
-        print("Invalid homeroom. It must be a letter followed by a number.")
-    except DuplicateStudentException:
-        print("Duplicate student found. Please enter a unique name and homeroom.")
 
 # Method that requests a valid grade for a subject, 
 # if the user enters an invalid grade, 
@@ -70,16 +61,23 @@ def get_valid_grade(subject):
         if not is_valid_grade(grade):
             print("Invalid grade. The grade must be between 0 and 100.")
             continue
-
         return grade
+    
 
 
-# Method that recieves a grade and returns if it is a grade higher than 0 and lower than 101.
+
+
+# Method that recieves a grade and returns if it is a grade higher than 0 and
+#  lower than 101.
+# It will also not end the loop until the user enters a valid grade, and it will return the valid grade.
 def is_valid_grade(grade):
-    if grade >= 0 and grade <= 100:
-        return True
-    else:
-        return False
+    while True:
+        if grade >= 0 and grade <= 100:
+            return True
+            continue
+        else:
+            return False
+            continue
     
 
 # Method that checks if the student name is empty and if it is not, it returns false, if it is empty it returns true.
@@ -97,6 +95,21 @@ def has_numbers(name):
     else:
         return False
 
+def get_valid_name(subject):
+    while True:
+        try:
+            name = input(f"Enter the student's {subject} name: ")
+
+        except ValueError:
+            print("Invalid input. Please enter a valid name.")
+            continue
+
+        if is_empty_name(name) or has_numbers(name):
+            print("Invalid name. It cannot be empty or have numbers.")
+            continue
+        
+        return name
+
 # Method that identifies a homeroom and determines if it has the correct format, 
 # which is a letter followed by a number, for example A1, B2, C3, etc. 
 def is_valid_homeroom(homeroom):
@@ -106,6 +119,21 @@ def is_valid_homeroom(homeroom):
         return True
     else:
         return False 
+
+def get_valid_homeroom(subject):
+    while True:
+        try:
+            homeroom = input(f"Enter the student's {subject} subject: ")
+
+        except ValueError:
+            print("Invalid input. Please enter a valid homeroom.")
+            continue
+
+        if not is_valid_homeroom(homeroom):
+            print("Invalid homeroom. It must be a letter followed by a number.")
+            continue
+        
+        return homeroom
 
 # Method that identifies if there are students with the same name and homeroom, 
 # if there are, it returns true, if not, it returns false.
@@ -174,22 +202,23 @@ def export_to_csv(student_list, filename):
         writer = csv
 
 def eliminate_student_by_name_and_homeroom(student_list):
-    # data is obtaines
+    # data is obtained
     name = input("Enter the student's name: ")
     homeroom = input("Enter the student's homeroom: ")
-
-    # The system asks first if the user is sure about eliminating the student, if the user says yes, it will eliminate the student, if the user says no, it will return to the main menu.
-    confirmation = input(f"Are you sure you want to remove the student {name} from homeroom {homeroom}? (yes/no): ")
-    if confirmation.lower() != "yes":
-        print("Operation cancelled.")
-        return
 
     # Loop through the student list and remove the student with the matching name and homeroom
     for student in student_list:
         if student["name"] == name and student["homeroom"] == homeroom:
-            student_list.remove(student)
-            print(f"Student {name} from homeroom {homeroom} has been removed.")
-            return
+
+            # The system asks first if the user is sure about eliminating the student, if the user says yes, it will eliminate the student, if the user says no, it will return to the main menu.
+                confirmation = input(f"Are you sure you want to remove the student {name} from homeroom {homeroom}? (yes/no): ")
+                if confirmation.lower() != "yes":
+                    print("Operation cancelled.")
+                    return
+
+                student_list.remove(student)
+                print(f"Student {name} from homeroom {homeroom} has been removed.")
+                return
     print(f"No student found with name {name} and homeroom {homeroom}.")
 
 

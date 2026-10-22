@@ -18,7 +18,13 @@ def main ():
         print("9. Exit")
         choice = input("Enter your choice: ")
         if choice == "1":
-            amount_ofstudents = int(input("Enter the amount of students you want to add: "))
+            while True:
+                try:
+                    amount_ofstudents = int(input("Enter the amount of students you want to add: "))
+                except ValueError:
+                    print("Invalid input. Please enter a valid number.")
+                    continue
+                break
             functions.addStudent(student_list, amount_ofstudents)
         elif choice == "2":
             functions.showStudents(student_list)
@@ -35,11 +41,15 @@ def main ():
             # Import the students from the csv file
             imported_students = export_students.import_from_csv("students.csv")
 
-            # Add the imported students to the main student list
-            export_students.imported_list_to_student_list(imported_students, student_list)
+            # if it detects that the file is existing in the system, it will 
+            # show a diffrente message
+            if imported_students is not None:
+                # Add the imported students to the main student list
+                export_students.imported_list_to_student_list(imported_students, student_list)
 
-            # Shows the students that were imported from the csv file
-            functions.showStudents(student_list)
+                # Shows the students that were imported from the csv file
+                functions.showStudents(student_list)
+    
         elif choice == "7":
             functions.eliminate_student_by_name_and_homeroom(student_list)
         elif choice == "8":

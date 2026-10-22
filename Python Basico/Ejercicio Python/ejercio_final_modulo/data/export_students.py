@@ -49,6 +49,7 @@ def import_from_csv(filename):
     except FileNotFoundError:
 
         print(f"File '{filename}' not found. Starting with an empty student list.")
+        return None
 
     return student_list
 
@@ -67,6 +68,6 @@ def imported_list_to_student_list(imported_list, student_list):
     if imported_count > 0:
         print(f"{imported_count} students imported successfully.")
     else:
-        print("No new students were imported. All students already exist in the main list.")
+        print("")
 
     return student_list
